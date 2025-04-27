@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Liste des tournois</h1>
+    <ul>
+        <li th:each="t : ${tournaments}" th:text="${t.name}"></li>
+    </ul>
+
+    <h2>Mes tournois</h2>
+    <ul>
+        <li th:each="t : ${myTournaments}" th:text="${t.name}"></li>
+    </ul>
+
+    <h2>Mes équipes</h2>
+    <ul>
+        <li th:each="e : ${myTeams}" th:text="${e.name}"></li>
+    </ul>
+</body>
+</html>

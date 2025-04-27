@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Inscription au tournoi</h1>
+    <form action="#" th:action="@{/tournaments/register}" method="post">
+        <input type="hidden" name="id" th:value="${tournament.id}"/>
+        <label for="team">Sélectionnez votre équipe :</label>
+        <select name="team" id="team">
+            <option th:each="team : ${teams}" th:value="${team.id}" th:text="${team.name}"></option>
+        </select>
+        <button type="submit">S'inscrire</button>
+    </form>
+
+    <h2>Mes tournois</h2>
+    <ul>
+        <li th:each="t : ${myTournaments}" th:text="${t.name}"></li>
+    </ul>
+
+    <h2>Mes équipes</h2>
+    <ul>
+        <li th:each="e : ${myTeams}" th:text="${e.name}"></li>
+    </ul>
+
+</body>
+</html>
