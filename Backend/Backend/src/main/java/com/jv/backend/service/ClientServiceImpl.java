@@ -92,6 +92,16 @@ public class ClientServiceImpl implements IClientService {
                 .orElseThrow(() -> new RuntimeException("Client not found"));
     }
 
+    @Override
+    public boolean existsByUsername(String username) {
+        return false;
+    }
+
+    @Override
+    public Client save(Client client) {
+        return clientRepository.save(client);
+    }
+
 
     @Override
     public Client updateClient(Long id, Client updatedClient) {

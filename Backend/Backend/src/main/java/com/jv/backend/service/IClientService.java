@@ -17,5 +17,7 @@ public interface IClientService {
     User enregistrerUser(User user) ;
     Role enregistrerRole(Role role);
     Client getClientByUsername(String username);
+    boolean existsByUsername(String username);
+    Client save(Client client);
 
 }

@@ -20,8 +20,10 @@ public class Role {
 
     private String role;
 
-    public Role(String role) {
-        this.role = role;
+    private String name;
+
+    public Role(String name) {
+        this.name = name;
     }
     public Role() {
     }
@@ -34,6 +36,13 @@ public class Role {
 
     public long getId() {
         return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setrole(String role) {

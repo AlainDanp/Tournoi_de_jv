@@ -22,21 +22,27 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String password;
+    private String email;
     private String username;
     public void addRole(Role role) {
         roles.add(role);
     }
     @ManyToMany(fetch = FetchType.EAGER)
-    private Collection<Role> roles=new ArrayList<Role>();
-    public User(String password, String username) {
-        super();
+    @JoinTable(
+            name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Collection<Role> roles = new ArrayList<>();
+
+    public User(String password, String username, String email) {
         this.password = password;
         this.username = username;
+        this.email = email;
     }
 
     public User() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
     public User(String password, String username, Collection<Role> roles) {
@@ -69,6 +75,13 @@ public class User implements UserDetails {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    public String getEmail() {
+        return email;
     }
 
     @Override

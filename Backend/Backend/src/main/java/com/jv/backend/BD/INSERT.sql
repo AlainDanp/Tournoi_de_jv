@@ -29,3 +29,7 @@ INSERT INTO client (
              '2025-04-25',
              @adresse_id
          );
+
+INSERT INTO roles (role) VALUES ('ADMIN');
+INSERT INTO roles (role) VALUES ('USER');
+

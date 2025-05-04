@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.*;
 import com.jv.backend.model.Adresse;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Data
 @Builder
@@ -16,8 +19,8 @@ public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String username;
 
+    private String username;
     private String nom;
     private String prenom;
     private String email;
@@ -34,6 +37,13 @@ public class Client {
     public Client(){
 
     }
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Role> roles = new HashSet<>();
 
     public Client(String username, String nom, String prenom, String email, String telephone, String motDePasse, String dateNaissance, String dateInscription, String sexe, Adresse adresse) {
         this.username = username;
@@ -47,9 +57,19 @@ public class Client {
         this.sexe = sexe;
         this.adresse = adresse;
     }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
     public String getUsername() {
         return username;
     }
+
     public void setUsername(String username) {
         this.username = username;
     }
@@ -125,6 +145,7 @@ public class Client {
     public void setAdresse(Adresse adresse) {
         this.adresse = adresse;
     }
+
 
 
 }

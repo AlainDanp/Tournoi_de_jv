@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication
@@ -23,7 +24,9 @@ public class BackendApplication implements CommandLineRunner {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
-    private IClientService service;
+
+    @Autowired
+    private IClientService service; // 🔥 CORRECTED 🔥
 
     public static void main(String[] args) {
         SpringApplication.run(BackendApplication.class, args);
@@ -31,13 +34,16 @@ public class BackendApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-       System.out.println("le token" + JWtUtil.generateToken("sqsq"));
+        //System.out.println("le token " + JWtUtil.generateToken("sqsq", "A"));
+
         if (roleRepository.findAll().isEmpty()) {
-            Role r1= service.enregistrerRole(new Role("ADMIN"));
-            Role r2= service.enregistrerRole(new Role("USER"));
-            Role r3= service.enregistrerRole(new Role("INVITER"));
+            Role r1 = service.enregistrerRole(new Role("ADMIN"));
+            Role r2 = service.enregistrerRole(new Role("USER"));
+            Role r3 = service.enregistrerRole(new Role("INVITER"));
+
             User admin = new User();
             admin.setUsername("admin");
+            admin.setEmail("admin@gmail.com");
             admin.setPassword(passwordEncoder.encode("1234"));
             admin.addRole(r1);
             admin.addRole(r2);
